@@ -18,7 +18,7 @@ $(document).ready(function() {
                 a4: "4",
             },
             correct: "a2",
-            gif: "#"
+            gif: "assets/images/spongebob_1.gif"
         },
         q2: {
             question: "what is 2 + 2?",
@@ -113,6 +113,7 @@ $(document).ready(function() {
             alert("You're right!");
             clearInterval(timeTracker);
             setTimeout(reset, 1000 * 5);
+            $("#gif").append("<img src='" + currentQuestion.gif + "'>")
         } else {
             alert("sorry...");
             clearInterval(timeTracker);
@@ -144,7 +145,7 @@ $(document).ready(function() {
         $("#time").text(timeLeft);
         timeTracker = setInterval(timer, 1000)
         currentQuestion = questions[Object.keys(questions)[questionIndex]];
-        $("#question, #choices").empty();
+        $("#question, #choices, #gif").empty();
         displayQuestion(currentQuestion);
         displayAnswers(currentQuestion);
         $("#a1, #a2, #a3, #a4").on("click", function (event) {
