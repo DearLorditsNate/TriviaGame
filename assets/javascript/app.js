@@ -50,7 +50,11 @@ $(document).ready(function() {
     // Stores currect question object
     var currentQuestion = questions[Object.keys(questions)[questionIndex]];
 
+    // Amount of time remaining to guess
     var timeLeft = 30;
+
+    // Initializes holder for interval timer
+    var timeTracker;
 
 
 
@@ -81,7 +85,7 @@ $(document).ready(function() {
 
     // setTimeout for 30 seconds for each question
     // var timerTracker = setInterval(timer, 1000);
-    var timeTracker;
+    
     // setTimeout to move to next question after 10 seconds
 
 
@@ -119,6 +123,11 @@ $(document).ready(function() {
     function timer() {
         timeLeft--;
         $("#time").text(timeLeft);
+        if (timeLeft === 0) {
+            alert("You ran out of time!");
+            clearInterval(timeTracker);
+            setTimeout(reset, 1000 * 5);
+        }
     }
 
     // incrementQuestionIndex adds one to questionIndex, which is taken as a parameter for the displayQuestion/Answer functions | resets to 0 once all items in the questions object have been displayed
