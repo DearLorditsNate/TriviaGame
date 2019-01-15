@@ -50,6 +50,9 @@ $(document).ready(function() {
     // Stores currect question object
     var currentQuestion = questions[Object.keys(questions)[questionIndex]];
 
+    var timeLeft = 30;
+
+
 
     // Generates a random number equal to the number of questions  in the questions object
     var i = Math.floor(Math.random() * 3);
@@ -72,10 +75,14 @@ $(document).ready(function() {
     ===============================
     */
 
-    // Timers that take displayQuestion function as an argument
-    var countDown = setInterval(function() {
-        reset();
-    }, 1000 * 3);
+    // var countDown = setInterval(function() {
+    //     reset();
+    // }, 1000 * 3);
+
+    // setTimeout for 30 seconds for each question
+    // var timerTracker = setInterval(timer, 1000);
+    var timeTracker;
+    // setTimeout to move to next question after 10 seconds
 
 
     /*
@@ -100,11 +107,18 @@ $(document).ready(function() {
     function isCorrect(currentQuestion, event) {
         if (event.target.id === currentQuestion.correct) {
             alert("You're right!");
-            clearInterval(countDown);
+            clearInterval(timeTracker);
+            setTimeout(reset, 1000 * 5);
         } else {
             alert("sorry...");
-            clearInterval(countDown);
+            clearInterval(timeTracker);
+            setTimeout(reset, 1000 * 5);
         }
+    }
+
+    function timer() {
+        timeLeft--;
+        $("#time").text(timeLeft);
     }
 
     // incrementQuestionIndex adds one to questionIndex, which is taken as a parameter for the displayQuestion/Answer functions | resets to 0 once all items in the questions object have been displayed
@@ -117,6 +131,9 @@ $(document).ready(function() {
     }
 
     function reset() {
+        timeLeft = 30;
+        $("#time").text(timeLeft);
+        timeTracker = setInterval(timer, 1000)
         currentQuestion = questions[Object.keys(questions)[questionIndex]];
         $("#question, #choices").empty();
         displayQuestion(currentQuestion);
@@ -132,6 +149,8 @@ $(document).ready(function() {
     Function Calls
     ===============================
     */
+
+    reset();
 
 
     /*
