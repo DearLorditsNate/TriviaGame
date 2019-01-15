@@ -111,14 +111,12 @@ $(document).ready(function() {
     function isCorrect(currentQuestion, event) {
         if (event.target.id === currentQuestion.correct) {
             alert("You're right!");
-            clearInterval(timeTracker);
-            setTimeout(reset, 1000 * 5);
-            $("#gif").append("<img src='" + currentQuestion.gif + "'>")
         } else {
             alert("sorry...");
-            clearInterval(timeTracker);
-            setTimeout(reset, 1000 * 5);
         }
+        clearInterval(timeTracker);
+        setTimeout(newQuestion, 1000 * 5);
+        $("#choices").html("<img src='" + currentQuestion.gif + "'>")
     }
 
     function timer() {
@@ -127,7 +125,7 @@ $(document).ready(function() {
         if (timeLeft === 0) {
             alert("You ran out of time!");
             clearInterval(timeTracker);
-            setTimeout(reset, 1000 * 5);
+            setTimeout(newQuestion, 1000 * 5);
         }
     }
 
@@ -140,7 +138,7 @@ $(document).ready(function() {
         }
     }
 
-    function reset() {
+    function newQuestion() {
         timeLeft = 30;
         $("#time").text(timeLeft);
         timeTracker = setInterval(timer, 1000)
@@ -160,7 +158,7 @@ $(document).ready(function() {
     ===============================
     */
 
-    reset();
+    newQuestion();
 
 
     /*
