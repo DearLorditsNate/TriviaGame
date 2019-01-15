@@ -44,11 +44,15 @@ $(document).ready(function() {
         }
     }
 
-    // Generates a random number equal to the number of questions  in the questions object
-    var i = Math.floor(Math.random() * 3);
-
     // Question Index
     var questionIndex = 0;
+
+    // Stores currect question object
+    var currentQuestion = questions[Object.keys(questions)[questionIndex]];
+
+
+    // Generates a random number equal to the number of questions  in the questions object
+    var i = Math.floor(Math.random() * 3);
 
     // Questions array
     var allQuestions = [];
@@ -81,20 +85,20 @@ $(document).ready(function() {
     */
 
     // displayQuestion function that takes the properties from each object in the array and displays them in the html
-    function displayQuestion(questionObj) {
-        $("#question").append("<p>" + questionObj.question + "</p>");
+    function displayQuestion(currentQuestion) {
+        $("#question").append("<p>" + currentQuestion.question + "</p>");
     }
 
     // displayAnswers function that takes the question as a parameter and displays the appropriate answer choices
-    function displayAnswers(questionObj) {
-        $("#choices").append("<p id='a1'>" + questionObj.answers.a1 + "</p>");
-        $("#choices").append("<p id='a2'>" + questionObj.answers.a2 + "</p>");
-        $("#choices").append("<p id='a3'>" + questionObj.answers.a3 + "</p>");
-        $("#choices").append("<p id='a4'>" + questionObj.answers.a4 + "</p>");
+    function displayAnswers(currentQuestion) {
+        $("#choices").append("<p id='a1'>" + currentQuestion.answers.a1 + "</p>");
+        $("#choices").append("<p id='a2'>" + currentQuestion.answers.a2 + "</p>");
+        $("#choices").append("<p id='a3'>" + currentQuestion.answers.a3 + "</p>");
+        $("#choices").append("<p id='a4'>" + currentQuestion.answers.a4 + "</p>");
     }
 
-    function isCorrect(questionObj, event) {
-        if (event.target.id === questionObj.correct) {
+    function isCorrect(currentQuestion, event) {
+        if (event.target.id === currentQuestion.correct) {
             alert("You're right!");
             clearInterval(countDown);
         } else {
@@ -113,11 +117,12 @@ $(document).ready(function() {
     }
 
     function reset() {
+        currentQuestion = questions[Object.keys(questions)[questionIndex]];
         $("#question, #choices").empty();
-        displayQuestion(questions[Object.keys(questions)[questionIndex]]);
-        displayAnswers(questions[Object.keys(questions)[questionIndex]]);
+        displayQuestion(currentQuestion);
+        displayAnswers(currentQuestion);
         $("#a1, #a2, #a3, #a4").on("click", function (event) {
-            isCorrect(questions[Object.keys(questions)[questionIndex]], event);
+            isCorrect(currentQuestion, event);
         });
         incrementQuestionIndex();
     }
