@@ -158,19 +158,26 @@ $(document).ready(function() {
         if (questionIndex < 2) {
             questionIndex++;
         } else {
-            questionIndex = 0;
+            endGame();
         }
     }
 
     // Initialize Game
     function initialize() {
-        $("#time, #question, #choices, #correct, .hidden, h2").hide();
+        $("#time, #question, #choices, #correct, #score-correct, #score-incorrect, .hidden, h2").hide();
+        $("#score-correct, #score-incorrect").empty();
+        correct = 0;
+        incorrect = 0;
+        questionIndex = 0;
     }
 
     // End Game
     function endGame() {
+        clearInterval(timeTracker);
         $("#time, #question, #choices, #correct, .hidden, h2").hide();
-
+        $("#score-correct, #score-incorrect").show();
+        $("#score-correct").text(correct);
+        $("#score-incorrect").text(incorrect);
     }
 
     // Totals 
