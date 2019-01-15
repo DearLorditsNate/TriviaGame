@@ -62,6 +62,9 @@ $(document).ready(function() {
     // Stores number incorrect
     var incorrect = 0;
 
+    // Stores the answer
+    var answer;
+
 
 
     // Generates a random number equal to the number of questions  in the questions object
@@ -125,6 +128,19 @@ $(document).ready(function() {
         clearInterval(timeTracker);
         setTimeout(newQuestion, 1000 * 5);
         $("#choices").html("<img src='" + currentQuestion.gif + "'>")
+        getAnswer(currentQuestion);
+    }
+
+    function getAnswer(currentQuestion) {
+        var answerList = currentQuestion.answers;
+        for (i in answerList) {
+            if (currentQuestion.correct === i) {
+            answer = answerList[i];
+            }
+        }
+        $(".hidden, #correct").show();
+        $("#correct").text(answer);
+        console.log("Answer: " + answer);
     }
 
     function timer() {
@@ -148,19 +164,25 @@ $(document).ready(function() {
 
     // Initialize Game
     function initialize() {
-        $("#time, #question, #choices, h2").hide();
+        $("#time, #question, #choices, #correct, .hidden, h2").hide();
+    }
+
+    // End Game
+    function endGame() {
+        $("#time, #question, #choices, #correct, .hidden, h2").hide();
+
     }
 
     // Totals 
 
     function newQuestion() {
         $("#time, #question, #choices, h2").show();
-        $("#start-btn").hide();
+        $("#start-btn, .hidden, #correct").hide();
         timeLeft = 30;
         $("#time").text(timeLeft);
         timeTracker = setInterval(timer, 1000)
         currentQuestion = questions[Object.keys(questions)[questionIndex]];
-        $("#question, #choices").empty();
+        $("#question, #choices, #correct").empty();
         displayQuestion(currentQuestion);
         displayAnswers(currentQuestion);
         $("#a1, #a2, #a3, #a4").on("click", function (event) {
@@ -175,8 +197,7 @@ $(document).ready(function() {
     ===============================
     */
 
-    // newQuestion();
-
+    // Hide elements on page load
     initialize();
 
 
