@@ -47,6 +47,9 @@ $(document).ready(function() {
     // Generates a random number equal to the number of questions  in the questions object
     var i = Math.floor(Math.random() * 3);
 
+    // Question Index
+    var questionIndex = 0;
+
     // Questions array
     var allQuestions = [];
 
@@ -66,6 +69,10 @@ $(document).ready(function() {
     */
 
     // Timers that take displayQuestion function as an argument
+    var countDown = setInterval(function() {
+        reset();
+    }, 1000 * 3);
+
 
     /*
     ===============================
@@ -86,27 +93,36 @@ $(document).ready(function() {
         $("#choices").append("<p id='a4'>" + questionObj.answers.a4 + "</p>");
     }
 
+    function incrementQuestionIndex() {
+        if (questionIndex < 2) {
+            questionIndex++;
+        } else {
+            questionIndex = 0;
+        }
+    }
+
+    function reset() {
+        $("#question, #choices").empty();
+        displayQuestion(questions[Object.keys(questions)[questionIndex]]);
+        displayAnswers(questions[Object.keys(questions)[questionIndex]]);
+        incrementQuestionIndex();
+        $("#a1, #a2, #a3, #a4").on("click", function () {
+            alert("You clicked me!");
+            clearInterval(countDown);
+        });
+    }
+
     /*
     ===============================
     Function Calls
     ===============================
     */
 
-    // Calling displayQuestion takes an argument of a random question from the questions object (by getting the question from the index equal to the random number generator)
-    displayQuestion(questions[Object.keys(questions)[i]]);
-
-    // Calling displayAnswers takes the same argument of a random question from the questions object as displayQuestion
-    displayAnswers(questions[Object.keys(questions)[i]]);
 
     /*
     ===============================
     Click Handlers
     ===============================
     */
-
-    // Listens for clicks on the p tags of the answer choices
-    $("#a1, #a2, #a3, #a4").on("click", function() {
-        alert("You clicked me!");
-    });
 
 });
