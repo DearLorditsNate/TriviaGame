@@ -56,6 +56,12 @@ $(document).ready(function() {
     // Initializes holder for interval timer
     var timeTracker;
 
+    // Stores number correct
+    var correct = 0;
+
+    // Stores number incorrect
+    var incorrect = 0;
+
 
 
     // Generates a random number equal to the number of questions  in the questions object
@@ -110,8 +116,10 @@ $(document).ready(function() {
 
     function isCorrect(currentQuestion, event) {
         if (event.target.id === currentQuestion.correct) {
+            correct++;
             alert("You're right!");
         } else {
+            incorrect++;
             alert("sorry...");
         }
         clearInterval(timeTracker);
@@ -138,12 +146,21 @@ $(document).ready(function() {
         }
     }
 
+    // Initialize Game
+    function initialize() {
+        $("#time, #question, #choices, h2").hide();
+    }
+
+    // Totals 
+
     function newQuestion() {
+        $("#time, #question, #choices, h2").show();
+        $("#start-btn").hide();
         timeLeft = 30;
         $("#time").text(timeLeft);
         timeTracker = setInterval(timer, 1000)
         currentQuestion = questions[Object.keys(questions)[questionIndex]];
-        $("#question, #choices, #gif").empty();
+        $("#question, #choices").empty();
         displayQuestion(currentQuestion);
         displayAnswers(currentQuestion);
         $("#a1, #a2, #a3, #a4").on("click", function (event) {
@@ -158,7 +175,9 @@ $(document).ready(function() {
     ===============================
     */
 
-    newQuestion();
+    // newQuestion();
+
+    initialize();
 
 
     /*
@@ -166,5 +185,7 @@ $(document).ready(function() {
     Click Handlers
     ===============================
     */
+
+    $("#start-btn").on("click", newQuestion);
 
 });
