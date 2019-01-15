@@ -17,7 +17,7 @@ $(document).ready(function() {
                 a3: "3",
                 a4: "4",
             },
-            correct: "2",
+            correct: "a2",
             gif: "#"
         },
         q2: {
@@ -28,18 +28,18 @@ $(document).ready(function() {
                 a3: "6",
                 a4: "8",
             },
-            correct: "4",
+            correct: "a2",
             gif: "#"
         },
         q3: {
             question: "what is 3 + 3?",
             answers: {
                 a1: "3",
-                a2: "6",
+                a2: "12",
                 a3: "9",
-                a4: "12",
+                a4: "6",
             },
-            correct: "6",
+            correct: "a4",
             gif: "#"
         }
     }
@@ -59,8 +59,8 @@ $(document).ready(function() {
     }
 
     // Test console logs
-    console.log("questions Object: " + questions.q1.correct);
-    console.log("allQuestions array: " + allQuestions[0].correct);
+    // console.log("questions Object: " + questions.q1.correct);
+    // console.log("allQuestions array: " + allQuestions[0].correct);
 
     /*
     ===============================
@@ -93,6 +93,17 @@ $(document).ready(function() {
         $("#choices").append("<p id='a4'>" + questionObj.answers.a4 + "</p>");
     }
 
+    function isCorrect(questionObj, event) {
+        if (event.target.id === questionObj.correct) {
+            alert("You're right!");
+            clearInterval(countDown);
+        } else {
+            alert("sorry...");
+            clearInterval(countDown);
+        }
+    }
+
+    // incrementQuestionIndex adds one to questionIndex, which is taken as a parameter for the displayQuestion/Answer functions | resets to 0 once all items in the questions object have been displayed
     function incrementQuestionIndex() {
         if (questionIndex < 2) {
             questionIndex++;
@@ -105,11 +116,10 @@ $(document).ready(function() {
         $("#question, #choices").empty();
         displayQuestion(questions[Object.keys(questions)[questionIndex]]);
         displayAnswers(questions[Object.keys(questions)[questionIndex]]);
-        incrementQuestionIndex();
-        $("#a1, #a2, #a3, #a4").on("click", function () {
-            alert("You clicked me!");
-            clearInterval(countDown);
+        $("#a1, #a2, #a3, #a4").on("click", function (event) {
+            isCorrect(questions[Object.keys(questions)[questionIndex]], event);
         });
+        incrementQuestionIndex();
     }
 
     /*
