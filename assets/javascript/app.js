@@ -65,39 +65,6 @@ $(document).ready(function() {
     // Stores the answer
     var answer;
 
-
-
-    // Generates a random number equal to the number of questions  in the questions object
-    var i = Math.floor(Math.random() * 3);
-
-    // Questions array
-    var allQuestions = [];
-
-    // Populate questions array
-    for (var key in questions) {
-        allQuestions.push(questions[key]);
-    }
-
-    // Test console logs
-    // console.log("questions Object: " + questions.q1.correct);
-    // console.log("allQuestions array: " + allQuestions[0].correct);
-
-    /*
-    ===============================
-    Timers
-    ===============================
-    */
-
-    // var countDown = setInterval(function() {
-    //     reset();
-    // }, 1000 * 3);
-
-    // setTimeout for 30 seconds for each question
-    // var timerTracker = setInterval(timer, 1000);
-    
-    // setTimeout to move to next question after 10 seconds
-
-
     /*
     ===============================
     Function Declarations
