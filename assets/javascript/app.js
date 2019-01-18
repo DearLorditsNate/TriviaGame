@@ -155,10 +155,8 @@ $(document).ready(function() {
 
     // incrementQuestionIndex adds one to questionIndex, which is taken as a parameter for the displayQuestion/Answer functions | resets to 0 once all items in the questions object have been displayed
     function incrementQuestionIndex() {
-        if (questionIndex < 2) {
+        if (questionIndex < 3) {
             questionIndex++;
-        } else {
-            endGame();
         }
     }
 
@@ -173,11 +171,13 @@ $(document).ready(function() {
 
     // End Game
     function endGame() {
-        clearInterval(timeTracker);
-        $("#time, #question, #choices, #correct, .hidden, h2").hide();
-        $("#score-correct, #score-incorrect").show();
-        $("#score-correct").text(correct);
-        $("#score-incorrect").text(incorrect);
+        if (questionIndex >= 3) {
+            clearInterval(timeTracker);
+            $("#time, #question, #choices, #correct, .hidden, h2").hide();
+            $("#score-correct, #score-incorrect").show();
+            $("#score-correct").text("Correct: " + correct);
+            $("#score-incorrect").text("Incorrect: " + incorrect);
+        }
     }
 
     // Totals 
@@ -188,12 +188,14 @@ $(document).ready(function() {
         timeLeft = 30;
         $("#time").text(timeLeft);
         timeTracker = setInterval(timer, 1000)
+        endGame();
         currentQuestion = questions[Object.keys(questions)[questionIndex]];
         $("#question, #choices, #correct").empty();
         displayQuestion(currentQuestion);
         displayAnswers(currentQuestion);
         $("#a1, #a2, #a3, #a4").on("click", function (event) {
             isCorrect(currentQuestion, event);
+            
         });
         incrementQuestionIndex();
     }
