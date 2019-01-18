@@ -129,7 +129,7 @@ $(document).ready(function() {
 
     // Initialize Game
     function initialize() {
-        $("#time, #question, #choices, #correct, #score-correct, #score-incorrect, .hidden, h2").hide();
+        $("#time, #question, #choices, #correct, #score-correct, #score-incorrect, #reset-btn, .hidden, h2").hide();
         $("#score-correct, #score-incorrect").empty();
         correct = 0;
         incorrect = 0;
@@ -140,6 +140,7 @@ $(document).ready(function() {
     function endGame() {
         if (questionIndex >= 3) {
             clearInterval(timeTracker);
+            $("#reset-btn").show();
             $("#time, #question, #choices, #correct, .hidden, h2").hide();
             $("#score-correct, #score-incorrect").show();
             $("#score-correct").text("Correct: " + correct);
@@ -151,7 +152,7 @@ $(document).ready(function() {
 
     function newQuestion() {
         $("#time, #question, #choices, h2").show();
-        $("#start-btn, .hidden, #correct").hide();
+        $("#start-btn, #reset-btn, .hidden, #correct").hide();
         timeLeft = 30;
         $("#time").text(timeLeft);
         timeTracker = setInterval(timer, 1000)
@@ -184,5 +185,10 @@ $(document).ready(function() {
     */
 
     $("#start-btn").on("click", newQuestion);
+
+    $("#reset-btn").on("click", function() {
+        initialize();
+        newQuestion();
+    });
 
 });
