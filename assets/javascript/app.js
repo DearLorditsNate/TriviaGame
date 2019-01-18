@@ -5,9 +5,8 @@ $(document).ready(function() {
     Global Variables
     ===============================
     */
-    // Store the question objects in an array
-    // Create objects for each questions | will include question, 4 answer choices, and the gif
-    // Users
+ 
+    // Stores questions, answer choices, correct answer, and gif
     var questions = {
         q1: {
             question: "what is 1 + 1?",
@@ -71,12 +70,10 @@ $(document).ready(function() {
     ===============================
     */
 
-    // displayQuestion function that takes the properties from each object in the array and displays them in the html
     function displayQuestion(currentQuestion) {
         $("#question").append("<p>" + currentQuestion.question + "</p>");
     }
 
-    // displayAnswers function that takes the question as a parameter and displays the appropriate answer choices
     function displayAnswers(currentQuestion) {
         $("#choices").append("<p id='a1'>" + currentQuestion.answers.a1 + "</p>");
         $("#choices").append("<p id='a2'>" + currentQuestion.answers.a2 + "</p>");
@@ -84,6 +81,7 @@ $(document).ready(function() {
         $("#choices").append("<p id='a4'>" + currentQuestion.answers.a4 + "</p>");
     }
 
+    // Compares user choice to correct answer and alerts correct or incorrect
     function isCorrect(currentQuestion, event) {
         if (event.target.id === currentQuestion.correct) {
             correct++;
@@ -92,9 +90,12 @@ $(document).ready(function() {
             incorrect++;
             alert("sorry...");
         }
+        // Clears interval and sets timeout for 5 seconds to next question
         clearInterval(timeTracker);
         setTimeout(newQuestion, 1000 * 5);
+        // Display gif
         $("#choices").html("<img src='" + currentQuestion.gif + "'>")
+        // Gets correct answer
         getAnswer(currentQuestion);
     }
 
@@ -120,7 +121,6 @@ $(document).ready(function() {
         }
     }
 
-    // incrementQuestionIndex adds one to questionIndex, which is taken as a parameter for the displayQuestion/Answer functions | resets to 0 once all items in the questions object have been displayed
     function incrementQuestionIndex() {
         if (questionIndex < 3) {
             questionIndex++;
@@ -129,7 +129,9 @@ $(document).ready(function() {
 
     // Initialize Game
     function initialize() {
+        // Hides HTML elements
         $("#time, #question, #choices, #correct, #score-correct, #score-incorrect, #reset-btn, .hidden, h2").hide();
+        // Resets scores and question index
         $("#score-correct, #score-incorrect").empty();
         correct = 0;
         incorrect = 0;
@@ -138,33 +140,43 @@ $(document).ready(function() {
 
     // End Game
     function endGame() {
+        // Make this number equal to the number of questions in the object
+
+        // Checks for end of questions
         if (questionIndex >= 3) {
             clearInterval(timeTracker);
+            // Hides and shows HTML elements for end game
             $("#reset-btn").show();
             $("#time, #question, #choices, #correct, .hidden, h2").hide();
             $("#score-correct, #score-incorrect").show();
+            // Displays final score count
             $("#score-correct").text("Correct: " + correct);
             $("#score-incorrect").text("Incorrect: " + incorrect);
         }
     }
 
-    // Totals 
-
+    // Populates a new question
     function newQuestion() {
+        // Hides and shows elements
         $("#time, #question, #choices, h2").show();
         $("#start-btn, #reset-btn, .hidden, #correct").hide();
+        // Resets time left
         timeLeft = 30;
         $("#time").text(timeLeft);
         timeTracker = setInterval(timer, 1000)
+        // Checks for endgame conditions
         endGame();
+        // Grabs next question
         currentQuestion = questions[Object.keys(questions)[questionIndex]];
+        // Empties HTML elements and populates new question and answers
         $("#question, #choices, #correct").empty();
         displayQuestion(currentQuestion);
         displayAnswers(currentQuestion);
+        // Listens for user answer selection
         $("#a1, #a2, #a3, #a4").on("click", function (event) {
             isCorrect(currentQuestion, event);
-            
         });
+        // Increments question index
         incrementQuestionIndex();
     }
 
@@ -176,7 +188,6 @@ $(document).ready(function() {
 
     // Hide elements on page load
     initialize();
-
 
     /*
     ===============================
