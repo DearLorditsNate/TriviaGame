@@ -30,7 +30,7 @@ span {
 
 /* 
 ===================================
-Header
+Header/Right/Wrong
 ===================================
 */
 
@@ -92,16 +92,3 @@ button {
 button:hover {
     cursor: pointer;
 }
-
-/* 
-===================================
-Right/Wrong
-===================================
-*/
-
-/* #right,
-#wrong {
-    font-family: 'Luckiest Guy', cursive;
-    text-transform: uppercase;
-    color: rgb(194, 149, 0);
-} */
