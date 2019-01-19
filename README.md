@@ -1,4 +1,4 @@
-# TriviaGame
+# Ten-Question Tatooine Trivia
 
 A jQuery and JavaScript trivia game with a Star Wars theme.
 
