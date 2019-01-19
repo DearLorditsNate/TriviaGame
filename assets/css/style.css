@@ -15,6 +15,9 @@ body {
     height: 100%;
     text-align: center;
     padding: 20px;
+    background-image: url("../images/jar-jar.jpeg");
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 h1,
@@ -24,11 +27,63 @@ span {
     margin: 10px;
 }
 
+/* 
+===================================
+Header
+===================================
+*/
+
+h1 {
+    font-size: 80px;
+    color: rgb(194, 149, 0);
+    margin-top: 100px;
+    font-family: 'Luckiest Guy', cursive;
+}
+
+/* 
+===================================
+Answer Choices
+===================================
+*/
+
+p,
+h2 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 30px;
+}
+
 #a1,
 #a2,
 #a3,
 #a4 {
     background-color: lightblue;
-    margin: 10px;
+    margin: 20px auto;
     padding: 10px;
+    width: 50%;
+}
+
+#a1,
+#a2,
+#a3,
+#a4:hover {
+    cursor: pointer;
+}
+
+/* 
+===================================
+Buttons
+===================================
+*/
+
+button {
+    font-family: 'Luckiest Guy', cursive;
+    height: 200px;
+    width: 400px;
+    font-size: 50px;
+    border-radius: 10px;
+    background-color: lightgreen;
+}
+
+button:hover {
+    cursor: pointer;
 }
