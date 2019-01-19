@@ -34,10 +34,11 @@ Header
 ===================================
 */
 
-h1 {
+h1,
+#right,
+#wrong {
     font-size: 80px;
     color: rgb(194, 149, 0);
-    /* margin-top: 100px; */
     font-family: 'Luckiest Guy', cursive;
 }
 
@@ -91,3 +92,16 @@ button {
 button:hover {
     cursor: pointer;
 }
+
+/* 
+===================================
+Right/Wrong
+===================================
+*/
+
+/* #right,
+#wrong {
+    font-family: 'Luckiest Guy', cursive;
+    text-transform: uppercase;
+    color: rgb(194, 149, 0);
+} */

@@ -9,37 +9,114 @@ $(document).ready(function() {
     // Stores questions, answer choices, correct answer, and gif
     var questions = {
         q1: {
-            question: "what is 1 + 1?",
+            question: "What color is Mace Windu's lightsaber?",
             answers: {
-                a1: "1",
-                a2: "2",
-                a3: "3",
-                a4: "4",
+                a1: "Blue",
+                a2: "Green",
+                a3: "Purple",
+                a4: "Red",
             },
-            correct: "a2",
-            gif: "assets/images/spongebob_1.gif"
+            correct: "a3",
+            gif: "assets/images/mace-windu.gif"
         },
         q2: {
-            question: "what is 2 + 2?",
+            question: "What type of ship is the Millennium Falcon?",
             answers: {
-                a1: "2",
-                a2: "4",
-                a3: "6",
-                a4: "8",
+                a1: "Nubian",
+                a2: "Corellian",
+                a3: "Gungan",
+                a4: "Mon Calamari",
             },
             correct: "a2",
-            gif: "#"
+            gif: "assets/images/millennium-falcon.gif"
         },
         q3: {
-            question: "what is 3 + 3?",
+            question: "What does Luke Skywalker call Obi-Wan Kenobi?",
             answers: {
-                a1: "3",
-                a2: "12",
-                a3: "9",
-                a4: "6",
+                a1: "Old Ben",
+                a2: "Father",
+                a3: "Smelly",
+                a4: "Papa Kenobi",
+            },
+            correct: "a1",
+            gif: "assets/images/old-ben.gif"
+        },
+        q4: {
+            question: "What is the capital planet of the Galactic Republic?",
+            answers: {
+                a1: "Kashyyyk",
+                a2: "Endor",
+                a3: "Coruscant",
+                a4: "Dantooine",
+            },
+            correct: "a3",
+            gif: "assets/images/coruscant.gif"
+        },
+        q5: {
+            question: "What is Count Dooku's Sith name?",
+            answers: {
+                a1: "Darth Sidious",
+                a2: "Darth Plagueis",
+                a3: "Darth Maul",
+                a4: "Darth Tyranus",
             },
             correct: "a4",
-            gif: "#"
+            gif: "assets/images/darth-tyranus.gif"
+        },
+        q6: {
+            question: "How old does Yoda claim he is on his deathbed?",
+            answers: {
+                a1: "900 years",
+                a2: "800 years",
+                a3: "1100 years",
+                a4: "750 years",
+            },
+            correct: "a1",
+            gif: "assets/images/yoda.gif"
+        },
+        q7: {
+            question: "Who made the predecessors to the Storm Troopers?",
+            answers: {
+                a1: "Kaminoans",
+                a2: "Wookies",
+                a3: "Bothans",
+                a4: "Mandalorians",
+            },
+            correct: "a1",
+            gif: "assets/images/kaminoans.gif"
+        },
+        q8: {
+            question: "Who was Anakin's podracing nemesis?",
+            answers: {
+                a1: "Ben Quadinaros",
+                a2: "Sebulba",
+                a3: "Dud Bolt",
+                a4: "Gasgano",
+            },
+            correct: "a2",
+            gif: "assets/images/sebulba.gif"
+        },
+        q9: {
+            question: "What do Obi-Wan and Luke sell to pay for passage on Han Solo's ship?",
+            answers: {
+                a1: "Luke's speeder",
+                a2: "Uncle Owen's moisture farm",
+                a3: "Aunt Beru's blue milk",
+                a4: "Luke's droids",
+            },
+            correct: "a1",
+            gif: "assets/images/droids.gif"
+        },
+        q10: {
+            question: "Which of these did Anakin make?",
+            answers: {
+                a1: "Podracer",
+                a2: "Droid",
+                a3: "Bad choices",
+                a4: "All of the above",
+            },
+            correct: "a4",
+            gif: "assets/images/anakin-liar.gif"
         }
     }
 
@@ -115,7 +192,6 @@ $(document).ready(function() {
         timeLeft--;
         $("#time").text(timeLeft);
         if (timeLeft === 0) {
-            // alert("You ran out of time!");
             $("#no-time").show();
             $("#choices").html("<img src='" + currentQuestion.gif + "'>")
             getAnswer(currentQuestion);
@@ -125,7 +201,7 @@ $(document).ready(function() {
     }
 
     function incrementQuestionIndex() {
-        if (questionIndex < 3) {
+        if (questionIndex < 10) {
             questionIndex++;
         }
     }
@@ -146,7 +222,7 @@ $(document).ready(function() {
         // Make this number equal to the number of questions in the object
 
         // Checks for end of questions
-        if (questionIndex >= 3) {
+        if (questionIndex >= 10) {
             clearInterval(timeTracker);
             // Hides and shows HTML elements for end game
             $("#reset-btn").show();
