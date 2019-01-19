@@ -18,6 +18,7 @@ body {
     background-image: url("../images/jar-jar.jpeg");
     background-position: center;
     background-repeat: no-repeat;
+    text-shadow: 2px 2px 0px rgb(0, 0, 0);
 }
 
 h1,
@@ -36,7 +37,7 @@ Header
 h1 {
     font-size: 80px;
     color: rgb(194, 149, 0);
-    margin-top: 100px;
+    /* margin-top: 100px; */
     font-family: 'Luckiest Guy', cursive;
 }
 
@@ -50,15 +51,17 @@ p,
 h2 {
     font-family: 'Roboto', sans-serif;
     font-size: 30px;
+    color: white;
+    margin: 20px;
 }
 
 #a1,
 #a2,
 #a3,
 #a4 {
-    background-color: lightblue;
+    background-color: lightgreen;
     margin: 20px auto;
-    padding: 10px;
+    padding: 20px;
     width: 50%;
 }
 
@@ -82,6 +85,7 @@ button {
     font-size: 50px;
     border-radius: 10px;
     background-color: lightgreen;
+    margin-top: 100px;
 }
 
 button:hover {
