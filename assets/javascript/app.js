@@ -115,7 +115,10 @@ $(document).ready(function() {
         timeLeft--;
         $("#time").text(timeLeft);
         if (timeLeft === 0) {
-            alert("You ran out of time!");
+            // alert("You ran out of time!");
+            $("#no-time").show();
+            $("#choices").html("<img src='" + currentQuestion.gif + "'>")
+            getAnswer(currentQuestion);
             clearInterval(timeTracker);
             setTimeout(newQuestion, 1000 * 5);
         }
@@ -130,7 +133,7 @@ $(document).ready(function() {
     // Initialize Game
     function initialize() {
         // Hides HTML elements
-        $("#time, #question, #right, #wrong, #choices, #correct, #score-correct, #score-incorrect, #reset-btn, .hidden, h2").hide();
+        $("#time, #question, #right, #wrong, #no-time, #choices, #correct, #score-correct, #score-incorrect, #reset-btn, .hidden, h2").hide();
         // Resets scores and question index
         $("#score-correct, #score-incorrect").empty();
         correct = 0;
@@ -147,7 +150,7 @@ $(document).ready(function() {
             clearInterval(timeTracker);
             // Hides and shows HTML elements for end game
             $("#reset-btn").show();
-            $("#time, #question, #right, #wrong, #choices, #correct, .hidden, h2").hide();
+            $("#time, #question, #right, #wrong, #no-time, #choices, #correct, .hidden, h2").hide();
             $("#score-correct, #score-incorrect").show();
             // Displays final score count
             $("#score-correct").text("Correct: " + correct);
@@ -159,7 +162,7 @@ $(document).ready(function() {
     function newQuestion() {
         // Hides and shows elements
         $("#time, #question, #choices, h2").show();
-        $("#start-btn, #reset-btn, .hidden, #right, #wrong, #correct").hide();
+        $("#start-btn, #reset-btn, .hidden, #right, #wrong, #no-time, #correct").hide();
         // Resets time left
         timeLeft = 30;
         $("#time").text(timeLeft);
